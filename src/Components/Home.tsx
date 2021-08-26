@@ -43,7 +43,7 @@ const Home = () => {
 
     return (
         <div className='form-container'>
-            {process.env.DEV_URL}
+            {process.env.REACT_APP_DEV_URL}
             <form onSubmit={formSubmit} className='form-wrapper'>
                 <div className='form-row'>
                     <label>{"Name"}</label>
