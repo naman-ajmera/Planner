@@ -29,7 +29,7 @@ const AllPlans = () => {
                 return axios.delete(`http://localhost:8080/api/deleteById/${item}`)
             });
         });
-    }, []);
+    }, [setPlans]);
 
     const removePlan = (index: number, id: number) => {
         const tempPlans = [...plans];

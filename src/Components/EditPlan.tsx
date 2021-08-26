@@ -7,15 +7,17 @@ const EditPlan = (props: any) => {
     const [end_time, setEndTime] = useState("");
     const [frequency, setFrequency] = useState('');
 
+    const { id } = props.match.params;
+
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/getPlanById/${props.match.params.id}`).then(res => {
+        axios.get(`http://localhost:8080/api/getPlanById/${id}`).then(res => {
             const { name, start_time, end_time, frequency } = res.data;
             setName(name);
             setFrequency(frequency);
             setStartTime(start_time);
             setEndTime(end_time);
         });
-    }, []);
+    }, [id]);
 
     const onRadioButtonClick = (e: any) => {
         setFrequency(e.target.value);
@@ -36,7 +38,7 @@ const EditPlan = (props: any) => {
     const formSubmit = (e: any) => {
         e.preventDefault();
         axios
-            .put(`http://localhost:8080/api/updatePlanById/${props.match.params.id}`, {
+            .put(`http://localhost:8080/api/updatePlanById/${id}`, {
                 name,
                 start_time: getDate(start_time),
                 end_time: getDate(end_time),
