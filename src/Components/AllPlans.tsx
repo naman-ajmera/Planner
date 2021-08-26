@@ -26,7 +26,7 @@ const AllPlans = () => {
             });
             setPlans(sortedPlans);
             expiredPlans.map(item => {
-                axios.delete(`http://localhost:8080/api/deleteById/${item}`)
+                return axios.delete(`http://localhost:8080/api/deleteById/${item}`)
             });
         });
     }, []);

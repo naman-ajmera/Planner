@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
 
 const EditPlan = (props: any) => {
     const [name, setName] = useState("");
