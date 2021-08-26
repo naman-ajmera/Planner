@@ -5,7 +5,7 @@ import './Planner.css';
 import moment from "moment";
 
 const AllPlans = () => {
-    const [plans, setPlans]: any[] = [] = useState([]);
+    const [plans, setPlans] = useState([]);
 
     useEffect(() => {
         const now = moment();
@@ -24,7 +24,7 @@ const AllPlans = () => {
             const sortedPlans = nonExpiredPlans.sort(function (a, b) {
                 return moment(a.start_time).diff(moment(b.start_time));
             });
-            setPlans(sortedPlans);
+            setPlans(plans => plans.concat(...sortedPlans))
             expiredPlans.map(item => {
                 return axios.delete(`http://localhost:8080/api/deleteById/${item}`)
             });
