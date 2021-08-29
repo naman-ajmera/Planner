@@ -1,22 +1,28 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { getDate } from '../Utility/DateFunction';
 
 const EditPlan = (props: any) => {
     const [name, setName] = useState("");
     const [start_time, setStartTime] = useState("");
     const [end_time, setEndTime] = useState("");
     const [frequency, setFrequency] = useState('');
+    const [parentId, setParentId] = useState('');
+
+    const history = useHistory();
 
     const { id } = props.match.params;
     const { REACT_APP_DEV_URL } = process.env;
 
     useEffect(() => {
         axios.get(`${REACT_APP_DEV_URL}/getPlanById/${id}`).then(res => {
-            const { name, start_time, end_time, frequency } = res.data;
+            const { name, start_time, end_time, frequency, parentId } = res.data;
             setName(name);
             setFrequency(frequency);
-            setStartTime(start_time);
-            setEndTime(end_time);
+            setStartTime(start_time.substr(11, 5));
+            setEndTime(end_time.substr(11, 5));
+            setParentId(parentId);
         });
     }, [id, REACT_APP_DEV_URL]);
 
@@ -24,29 +30,19 @@ const EditPlan = (props: any) => {
         setFrequency(e.target.value);
     };
 
-    const getDate = (time: any) => {
-        const year = new Date().getFullYear();
-        const month = new Date().getMonth() + 1;
-        const newDate = new Date().getDate();
-        const seconds = new Date().getSeconds();
-        var formattedDate = "";
-        formattedDate = `${year}-${month}-${newDate} ${time.split(":")[0]}:${time.split(":")[1]
-            }:${seconds}`;
-
-        return formattedDate;
-    };
-
     const formSubmit = (e: any) => {
         e.preventDefault();
         axios
-            .put(`http://localhost:8080/api/updatePlanById/${id}`, {
+            .put(`${REACT_APP_DEV_URL}/updatePlanById/${id}`, {
                 name,
                 start_time: getDate(start_time),
                 end_time: getDate(end_time),
                 frequency,
+                parentId
             })
             .then((res) => {
                 alert('Plan Updated Successfully.!');
+                history.push(`/all-plans`)
             });
     };
 
@@ -93,10 +89,11 @@ const EditPlan = (props: any) => {
                         <div>
                             <label>{"None"}</label>
                             <input
-                                value={frequency}
+                                value={"None"}
                                 onClick={(e) => onRadioButtonClick(e)}
                                 required={true}
                                 type="radio"
+                                checked={frequency === 'None'}
                                 name="radio-group"
                             />
                         </div>
@@ -107,6 +104,7 @@ const EditPlan = (props: any) => {
                                 onClick={(e) => onRadioButtonClick(e)}
                                 required={true}
                                 type="radio"
+                                checked={frequency === 'Daily'}
                                 name="radio-group"
                             />
                         </div>
@@ -117,6 +115,7 @@ const EditPlan = (props: any) => {
                                 onClick={(e) => onRadioButtonClick(e)}
                                 required={true}
                                 type="radio"
+                                checked={frequency === 'Weekly'}
                                 name="radio-group"
                             />
                         </div>
@@ -127,6 +126,7 @@ const EditPlan = (props: any) => {
                                 onClick={(e) => onRadioButtonClick(e)}
                                 required={true}
                                 type="radio"
+                                checked={frequency === 'Monthly'}
                                 name="radio-group"
                             />
                         </div>

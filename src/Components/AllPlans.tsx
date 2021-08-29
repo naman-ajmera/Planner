@@ -10,12 +10,12 @@ const AllPlans = () => {
     const { REACT_APP_DEV_URL } = process.env;
 
     useEffect(() => {
-        const now = moment();
+        const now = moment().format('YYYY-MM-DD');
         const expiredPlans: any[] = [];
         const nonExpiredPlans: any[] = [];
         axios.get(`${REACT_APP_DEV_URL}/getAllPlans`).then(res => {
             res.data.forEach((item: any) => {
-                const curr = moment(item.start_time);
+                const curr = moment(item.start_time).format('YYYY-MM-DD');
                 if (now > curr) {
                     expiredPlans.push(item.id);
                 }
@@ -44,6 +44,7 @@ const AllPlans = () => {
         <div>
             <div className='plan-row-header'>
                 <div className='header'>{'Name'}</div>
+                <div className='header'>{'Date'}</div>
                 <div className='header'>{'Start Time'}</div>
                 <div className='header'>{'End Time'}</div>
                 <div className='header'>{'Frequency'}</div>

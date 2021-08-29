@@ -44,14 +44,14 @@
 
 .frequency-row {
   display: flex;
-  margin-top: 0.5em;
+  margin-top: 1em;
   justify-content: space-around;
 }
 
 .plan-row {
   display: grid;
   background: lightgrey;
-  grid-template-columns: 16% 16% 16% 16% 16% 16%;
+  grid-template-columns: 14% 14% 14% 14% 14% 14% 14%;
   box-shadow: 0.5px 0.5px 3px grey;
   padding: 1em;
   margin: 2em 5em;
@@ -62,7 +62,7 @@
   display: grid;
   background: black;
   color: white;
-  grid-template-columns: 16% 16% 16% 16% 16% 16%;
+  grid-template-columns: 14% 14% 14% 14% 14% 14% 14%;
   box-shadow: 0.5px 0.5px 3px grey;
   padding: 1em;
   margin: 2em 5em;
@@ -80,7 +80,7 @@ a {
   background: #bbbba5;
 }
 .weekly {
-  background: #ce8fe6;
+  background: #dcb0ec;
 }
 
 .monthly {
@@ -100,4 +100,8 @@ a {
   padding: 1em;
   margin: 2em 5em;
   text-align: center;
+}
+
+.update-delete-icon {
+  cursor: pointer;
 }

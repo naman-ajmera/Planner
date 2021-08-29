@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { getDate } from '../Utility/DateFunction';
 
 const Home = () => {
     const [name, setName] = useState("");
@@ -8,18 +9,6 @@ const Home = () => {
     const [frequency, setFrequency] = useState(null);
 
     const { REACT_APP_DEV_URL } = process.env;
-
-    const getDate = (time: any) => {
-        const year = new Date().getFullYear();
-        const month = new Date().getMonth() + 1;
-        const newDate = new Date().getDate();
-        const seconds = new Date().getSeconds();
-        var formattedDate = "";
-        formattedDate = `${year}-${month}-${newDate} ${time.split(":")[0]}:${time.split(":")[1]
-            }:${seconds}`;
-
-        return formattedDate;
-    };
 
     const formSubmit = (e: any) => {
         e.preventDefault();
@@ -45,7 +34,6 @@ const Home = () => {
 
     return (
         <div className='form-container'>
-            {process.env.REACT_APP_DEV_URL}
             <form onSubmit={formSubmit} className='form-wrapper'>
                 <div className='form-row'>
                     <label>{"Name"}</label>
@@ -91,6 +79,7 @@ const Home = () => {
                                 onClick={(e) => onRadioButtonClick(e)}
                                 required={true}
                                 type="radio"
+                                checked={frequency === 'None'}
                                 name="radio-group"
                             />
                         </div>
@@ -101,6 +90,7 @@ const Home = () => {
                                 onClick={(e) => onRadioButtonClick(e)}
                                 required={true}
                                 type="radio"
+                                checked={frequency === 'Daily'}
                                 name="radio-group"
                             />
                         </div>
@@ -111,6 +101,7 @@ const Home = () => {
                                 onClick={(e) => onRadioButtonClick(e)}
                                 required={true}
                                 type="radio"
+                                checked={frequency === 'Weekly'}
                                 name="radio-group"
                             />
                         </div>
@@ -121,6 +112,7 @@ const Home = () => {
                                 onClick={(e) => onRadioButtonClick(e)}
                                 required={true}
                                 type="radio"
+                                checked={frequency === 'Monthly'}
                                 name="radio-group"
                             />
                         </div>

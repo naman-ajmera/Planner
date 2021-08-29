@@ -17,11 +17,12 @@ const PlanRow = (props: IPlanRow) => {
     return (
         <div className={`plan-row ${plan.frequency === 'None' ? 'none' : plan.frequency === 'Daily' ? 'daily' : plan.frequency === 'Weekly' ? 'weekly' : 'monthly'}`}>
             <div>{plan.name}</div>
+            <div>{plan.start_time.substr(0, 10)}</div>
             <div>{plan.start_time.substr(11, 5)}</div>
             <div>{plan.end_time.substr(11, 5)}</div>
             <div>{plan.frequency}</div>
-            <div><FontAwesomeIcon icon={faEdit} onClick={() => history.push(`/edit-plan/${plan.id}`)} /></div>
-            <div><FontAwesomeIcon icon={faTrashAlt} onClick={() => removePlan(index, plan.id)} /></div>
+            <div><FontAwesomeIcon className='update-delete-icon' icon={faEdit} onClick={() => history.push(`/edit-plan/${plan.id}`)} /></div>
+            <div><FontAwesomeIcon className='update-delete-icon' icon={faTrashAlt} onClick={() => removePlan(index, plan.id)} /></div>
         </div>
     );
 }

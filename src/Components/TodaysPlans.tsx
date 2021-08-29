@@ -31,6 +31,7 @@ const TodaysPlans = () => {
         <div>
             <div className='plan-row-header'>
                 <div className='header'>{'Name'}</div>
+                <div className='header'>{'Date'}</div>
                 <div className='header'>{'Start Time'}</div>
                 <div className='header'>{'End Time'}</div>
                 <div className='header'>{'Frequency'}</div>
