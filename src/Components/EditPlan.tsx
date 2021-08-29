@@ -18,7 +18,7 @@ const EditPlan = (props: any) => {
             setStartTime(start_time);
             setEndTime(end_time);
         });
-    }, [id]);
+    }, [id, REACT_APP_DEV_URL]);
 
     const onRadioButtonClick = (e: any) => {
         setFrequency(e.target.value);

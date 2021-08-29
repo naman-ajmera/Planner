@@ -18,7 +18,7 @@ const TodaysPlans = () => {
             });
             setPlans(sortedPlans);
         });
-    }, []);
+    }, [REACT_APP_DEV_URL]);
 
     const removePlan = (index: number, id: number) => {
         const tempPlans = [...plans];

@@ -31,7 +31,7 @@ const AllPlans = () => {
                 return axios.delete(`${REACT_APP_DEV_URL}/deleteById/${item}`)
             });
         });
-    }, [setPlans]);
+    }, [setPlans, REACT_APP_DEV_URL]);
 
     const removePlan = (index: number, id: number) => {
         const tempPlans = [...plans];
