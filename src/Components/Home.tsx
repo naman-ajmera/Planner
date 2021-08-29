@@ -7,6 +7,8 @@ const Home = () => {
     const [end_time, setEndTime] = useState("");
     const [frequency, setFrequency] = useState(null);
 
+    const { REACT_APP_DEV_URL } = process.env;
+
     const getDate = (time: any) => {
         const year = new Date().getFullYear();
         const month = new Date().getMonth() + 1;
@@ -22,7 +24,7 @@ const Home = () => {
     const formSubmit = (e: any) => {
         e.preventDefault();
         axios
-            .post("http://localhost:8080/api/savePlan", {
+            .post(`${REACT_APP_DEV_URL}/savePlan`, {
                 name,
                 start_time: getDate(start_time),
                 end_time: getDate(end_time),

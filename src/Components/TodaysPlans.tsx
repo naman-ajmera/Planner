@@ -9,8 +9,10 @@ const TodaysPlans = () => {
 
     const [plans, setPlans] = useState([]);
 
+    const { REACT_APP_DEV_URL } = process.env;
+
     useEffect(() => {
-        axios.get("http://localhost:8080/api/getAllPlansForToday").then(res => {
+        axios.get(`${REACT_APP_DEV_URL}/getAllPlansForToday`).then(res => {
             const sortedPlans = res.data.sort(function (a: any, b: any) {
                 return moment(a.start_time).diff(moment(b.start_time));
             });
@@ -22,7 +24,7 @@ const TodaysPlans = () => {
         const tempPlans = [...plans];
         tempPlans.splice(index, 1);
         setPlans(tempPlans);
-        axios.delete(`http://localhost:8080/api/deleteById/${id}`);
+        axios.delete(`${REACT_APP_DEV_URL}/deleteById/${id}`);
     }
 
     return (

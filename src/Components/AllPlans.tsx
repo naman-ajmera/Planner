@@ -7,11 +7,13 @@ import moment from "moment";
 const AllPlans = () => {
     const [plans, setPlans] = useState([]);
 
+    const { REACT_APP_DEV_URL } = process.env;
+
     useEffect(() => {
         const now = moment();
         const expiredPlans: any[] = [];
         const nonExpiredPlans: any[] = [];
-        axios.get("http://localhost:8080/api/getAllPlans").then(res => {
+        axios.get(`${REACT_APP_DEV_URL}/getAllPlans`).then(res => {
             res.data.forEach((item: any) => {
                 const curr = moment(item.start_time);
                 if (now > curr) {
@@ -26,7 +28,7 @@ const AllPlans = () => {
             });
             setPlans(plans => plans.concat(...sortedPlans))
             expiredPlans.map(item => {
-                return axios.delete(`http://localhost:8080/api/deleteById/${item}`)
+                return axios.delete(`${REACT_APP_DEV_URL}/deleteById/${item}`)
             });
         });
     }, [setPlans]);
@@ -35,7 +37,7 @@ const AllPlans = () => {
         const tempPlans = [...plans];
         tempPlans.splice(index, 1);
         setPlans(tempPlans);
-        axios.delete(`http://localhost:8080/api/deleteById/${id}`);
+        axios.delete(`${REACT_APP_DEV_URL}/deleteById/${id}`);
     };
 
     return (
@@ -51,7 +53,7 @@ const AllPlans = () => {
             {plans.length > 0 ? plans.map((item: any, index: any) => (
                 <PlanRow removePlan={removePlan} plan={item} index={index} key={index} />
             )) : <div className='no-plans'>
-                {'No Plans for today.!'}
+                {'No Plans Exists.!'}
             </div>}
         </div>
     );

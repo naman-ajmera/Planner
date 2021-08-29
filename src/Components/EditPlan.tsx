@@ -8,9 +8,10 @@ const EditPlan = (props: any) => {
     const [frequency, setFrequency] = useState('');
 
     const { id } = props.match.params;
+    const { REACT_APP_DEV_URL } = process.env;
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/getPlanById/${id}`).then(res => {
+        axios.get(`${REACT_APP_DEV_URL}/getPlanById/${id}`).then(res => {
             const { name, start_time, end_time, frequency } = res.data;
             setName(name);
             setFrequency(frequency);
